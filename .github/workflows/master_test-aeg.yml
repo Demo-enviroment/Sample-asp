@@ -22,8 +22,13 @@ jobs:
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v1.0.5
 
+      - name: Create packages directory
+        run: New-Item -ItemType Directory -Force -Path .\packages
+
       - name: Restore NuGet packages
-        run: nuget restore
+        shell: pwsh
+        run: |
+          & "C:\hostedtoolcache\windows\nuget.exe\6.7.0\x64\nuget.exe" restore packages.config -PackagesDirectory .\packages
 
       - name: Publish to folder
         run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
