@@ -27,7 +27,7 @@ jobs:
 
       - name: Restore NuGet packages
         shell: pwsh
-        run: nuget restore packages.config -PackagesDirectory .\packages
+        run: nuget restore DemoWebApp.csproj
 
       - name: Publish to folder
         run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:RestorePackagesPath=".\packages" /p:_PackageTempDir="\published\" /p:TargetFrameworkVersion=v3.5
