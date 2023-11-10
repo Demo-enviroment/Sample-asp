@@ -27,7 +27,7 @@ jobs:
 
       - name: Restore NuGet packages
         shell: pwsh
-        run: NuGet Package Restore
+        run: nuget restore
 
       - name: Publish to folder
         run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\" /p:TargetFrameworkVersion=v3.5
