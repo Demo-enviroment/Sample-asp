@@ -30,7 +30,7 @@ jobs:
         run: nuget restore DemoWebApp.csproj -PackagesDirectory .\packages
 
       - name: Publish to folder
-        run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:RestorePackagesPath=".\packages" /p:_PackageTempDir="\published\" /p:TargetFrameworkVersion=v3.5
+        run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:RestorePackagesPath=".\packages" /p:_PackageTempDir="\published\" /p:TargetFrameworkVersion=v4.8
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
