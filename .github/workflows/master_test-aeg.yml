@@ -25,16 +25,12 @@ jobs:
       - name: Create packages directory
         run: New-Item -ItemType Directory -Force -Path .\packages
 
-      - name: Test NuGet Executable
-        shell: pwsh
-        run: nuget help
-
       - name: Restore NuGet packages
         shell: pwsh
         run: nuget restore packages.config -PackagesDirectory .\packages
 
       - name: Publish to folder
-        run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
+        run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\" /p:TargetFrameworkVersion=v3.5
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
