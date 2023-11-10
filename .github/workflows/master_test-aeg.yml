@@ -33,6 +33,13 @@ jobs:
         shell: pwsh
         run: Get-ChildItem -Path .\packages -Recurse
 
+      - name: Install .NET Framework 4.5
+        run: |
+          $url = "https://download.microsoft.com/download/E/A/1/EA19D08A-22E9-495C-8F35-D44B8A1C259E/NDP45-DevPack-KB2901907.exe"
+          $output = "dotNetFx45Devpack.exe"
+          Invoke-WebRequest -Uri $url -OutFile $output
+          Start-Process -FilePath $output -ArgumentList '/quiet /norestart' -Wait
+
       - name: Publish to folder
         run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:RestorePackagesPath=".\packages" /p:_PackageTempDir="\published\" /p:TargetFrameworkVersion=v4.5
 
